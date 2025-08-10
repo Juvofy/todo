@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+main {
+    background-color: rgb(0, 184, 184);
+    flex-grow: 1;
+}
+
+form {
+    padding: 1rem;
+    background: #067960;
+    position: sticky;
+    top: 0;
+}
+
+input[name="text"] {
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    border-top-right-radius: 9rem;
+    border-bottom-right-radius: 9rem;
+    border: none;
+    background-color: #fff7;
+    font-size: 1.25rem;
+
+    &:active, &:hover, &:focus {
+        background-color: #fff8;
+        outline: none;
+    }
+
+    &::placeholder {
+        color: #fffa;
+    }
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+button {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    height: calc(100% - 2rem);
+    border-radius: 999rem;
+    aspect-ratio: 1 / 1;
+    font-size: 2.5rem;
+    border: none;
+}
+
+button[type="submit"] {
+    color: #067960;
+    background: white;
+}
+
+button.remove {
+    background: red;
+    color: white;
+}
+
+button.check {
+    background: white;
+    border: green 0.25rem solid;
+    color: white;
+    height: 100%;
+    top: 0;
+    font-size: 1.675rem;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+label:has(:checked) > button.check {
+    background: green;
+
+    &::after {
+        content: "\2713";
+    }
+}
+
+label:has(:checked) > span {
+    text-decoration: line-through;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem;
+}
+
+li {
+    gap: 0.25rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 0.45rem;
+    display: flex;
+    font-size: 2.5rem;
+    position: relative;
+    user-select: none;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 2.5rem);
+    position: relative;
+}
