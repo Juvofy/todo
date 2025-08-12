@@ -10,6 +10,7 @@ export class Todo {
 
     constructor() {
         const logo = document.createElement("img");
+        logo.draggable = false;
         logo.src = Juvofy;
 
         const input = document.createElement("input");
