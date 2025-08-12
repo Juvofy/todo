@@ -1,5 +1,6 @@
 import { version } from "../package.json";
 import { TodoItem } from "./todo-item";
+import Juvofy from "./svg/juvofy.svg";
 
 export class Todo {
     private readonly ul = document.createElement("ul");
@@ -8,15 +9,19 @@ export class Todo {
     private readonly items: Item[] = [];
 
     constructor() {
+        const logo = document.createElement("img");
+        logo.src = Juvofy;
+
         const input = document.createElement("input");
         input.placeholder = "Enter your today task..";
+        input.type = "text";
         input.name = "text";
 
         const submitButton = document.createElement("button");
         submitButton.type = "submit";
         submitButton.ariaLabel = "Plus";
 
-        this.form.append(input, submitButton);
+        this.form.append(input, submitButton,logo);
 
         this.form.addEventListener("submit", e => {
             e.preventDefault();

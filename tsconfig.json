@@ -4,6 +4,7 @@
         "module": "preserve",
         "moduleResolution": "bundler",
         "types": [
+            "vite/client"
         ],
         "lib": [
             "ESNext",

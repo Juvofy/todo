@@ -11,12 +11,12 @@ body {
 }
 
 main {
-	background-color: rgb(0, 184, 184);
+	background-color: #333;
 	flex-grow: 1;
 }
 
 form {
-	background: #067960;
+	background: #000;
 	display: grid;
 	padding: 1rem;
 	position: sticky;
@@ -26,21 +26,26 @@ form {
 		grid-column: 1;
 		grid-row: 1;
 	}
+
+    img {
+        height: 2.75rem;
+        width: 2.75rem;
+    }
 }
 
-input[name="text"] {
-	background-color: #fff7;
+input[type="text"] {
+    color: white;
+	background-color: #333;
 	border-radius: 2rem 12rem 12rem 2rem;
 	border: none;
 	font-size: 1.25rem;
 	padding: 0.75rem 0.5rem;
+    padding-left: 2.75rem;
 	width: 100%;
 
 	&:active,
-	&:hover,
-	&:focus {
-		background-color: #fff8;
-		outline: none;
+	&:hover {
+		background-color: #333E;
 	}
 
 	&::placeholder {
@@ -64,7 +69,7 @@ button {
 }
 
 button[type="submit"] {
-	background-color: white;
+	background-color: gold;
 	background-image: url("./svg/plus.svg");
 	background-size: 50%;
 	height: 100%;
@@ -77,15 +82,15 @@ button.remove {
 }
 
 button.remove {
-	background-color: red;
+	background-color: darkred;
 	background-image: url("./svg/cross.svg");
 	background-size: 50%;
 	flex-shrink: 0;
 }
 
 button.check {
-	background-color: white;
-	border: green 0.25rem solid;
+	background-color: transparent;
+	border: darkgreen 0.25rem solid;
 	color: white;
 	pointer-events: none;
 	position: relative;
@@ -99,7 +104,7 @@ label {
 }
 
 label:has(:checked) > button.check {
-	background-color: green;
+	background-color: darkgreen;
 	background-image: url("./svg/checkmark.svg");
 	background-size: 75%;
 }
@@ -117,7 +122,8 @@ ul {
 }
 
 li {
-	background: white;
+	background: black;
+	color: #ccc;
 	border-radius: 0.45rem;
 	display: flex;
 	font-size: 1.5rem;
@@ -125,4 +131,5 @@ li {
 	padding: 0.75rem;
 	position: relative;
 	user-select: none;
+    gap: 1rem;
 }

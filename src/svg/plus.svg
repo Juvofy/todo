@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <!-- Handwritten SVG -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-    <path stroke="#067960" stroke-width="2.5" d="M10,1 V19 M1,10 H19" />
+    <path stroke="#010101" stroke-width="2.5" d="M10,1 V19 M1,10 H19" />
 </svg>
