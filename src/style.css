@@ -21,31 +21,34 @@ form {
 	padding: 1rem;
 	position: sticky;
 	top: 0;
+	grid-template-columns: 3.5rem 1fr;
 
 	> * {
-		grid-column: 1;
+		grid-column: 2;
 		grid-row: 1;
 	}
 
-    img {
-        height: 2.75rem;
-        width: 2.75rem;
-    }
+	img {
+		height: 3rem;
+		width: 3rem;
+		background-color: #333;
+		border-radius: 3px;
+		grid-column: 1;
+	}
 }
 
 input[type="text"] {
-    color: white;
+	color: white;
 	background-color: #333;
-	border-radius: 2rem 12rem 12rem 2rem;
+	border-radius: 3px 24px 24px 3px;
 	border: none;
 	font-size: 1.25rem;
 	padding: 0.75rem 0.5rem;
-    padding-left: 2.75rem;
 	width: 100%;
 
 	&:active,
 	&:hover {
-		background-color: #333E;
+		background-color: #333e;
 	}
 
 	&::placeholder {
@@ -131,5 +134,5 @@ li {
 	padding: 0.75rem;
 	position: relative;
 	user-select: none;
-    gap: 1rem;
+	gap: 1rem;
 }
