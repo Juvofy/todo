@@ -1,5 +1,5 @@
 import { version } from "../package.json";
-import { TodoListItem } from "./to-do-list-item";
+import { TodoItem } from "./todo-item";
 
 export class Todo {
     private readonly ul = document.createElement("ul");
@@ -40,7 +40,7 @@ export class Todo {
     }
 
     public add(item: Item) {
-        const node = new TodoListItem(...item);
+        const node = new TodoItem(...item);
         this.ul.appendChild(node.root);
         this.items.push(item);
 
@@ -65,4 +65,4 @@ export class Todo {
     }
 }
 
-export type Item = ConstructorParameters<typeof TodoListItem>;
+export type Item = ConstructorParameters<typeof TodoItem>;

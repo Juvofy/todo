@@ -1,10 +1,10 @@
-export class TodoListItem {
+export class TodoItem {
 	public readonly root = document.createElement("li");
 	public readonly checkbox = document.createElement("input");
 	public readonly label = document.createElement("label");
 	public readonly removeButton = document.createElement("button");
 	public readonly checkButton = document.createElement("button");
-	public readonly span = document.createElement("span")
+	public readonly span = document.createElement("span");
 
 	constructor(text: string, checked: boolean) {
 		this.span.append(text);
