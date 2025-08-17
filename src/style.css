@@ -21,6 +21,7 @@ form {
 	padding: 1rem;
 	position: sticky;
 	top: 0;
+	z-index: 1;
 	grid-template-columns: 3.5rem 1fr;
 
 	> * {
@@ -80,13 +81,21 @@ button[type="submit"] {
 }
 
 button.check,
-button.remove {
+button.remove,
+button.edit {
 	height: 2.5rem;
 }
 
 button.remove {
 	background-color: darkred;
 	background-image: url("./svg/cross.svg");
+	background-size: 50%;
+	flex-shrink: 0;
+}
+
+button.edit {
+	background-color: blue;
+	background-image: url("./svg/edit.svg");
 	background-size: 50%;
 	flex-shrink: 0;
 }

@@ -2,6 +2,7 @@ export class TodoItem {
 	public readonly root = document.createElement("li");
 	public readonly checkbox = document.createElement("input");
 	public readonly label = document.createElement("label");
+	public readonly editButton = document.createElement("button");
 	public readonly removeButton = document.createElement("button");
 	public readonly checkButton = document.createElement("button");
 	public readonly span = document.createElement("span");
@@ -18,7 +19,10 @@ export class TodoItem {
 		this.removeButton.ariaLabel = "Cross";
 		this.removeButton.classList.add("remove");
 
+		this.editButton.ariaLabel = "Edit";
+		this.editButton.classList.add("edit");
+
 		this.label.append(this.span, this.checkbox, this.checkButton);
-		this.root.append(this.label, this.removeButton);
+		this.root.append(this.label, this.removeButton, this.editButton);
 	}
 }

@@ -4,7 +4,7 @@ import Juvofy from "./svg/juvofy.svg";
 
 export class Todo {
     private readonly ul = document.createElement("ul");
-    private readonly form = document.createElement("form");
+    private readonly topBar = document.createElement("form");
     private readonly STORAGE_KEY = `todo-v${version}`;
     private readonly items: Item[] = [];
 
@@ -16,25 +16,22 @@ export class Todo {
         const input = document.createElement("input");
         input.placeholder = "Enter your today task..";
         input.type = "text";
-        input.name = "text";
 
         const submitButton = document.createElement("button");
         submitButton.type = "submit";
         submitButton.ariaLabel = "Plus";
 
-        this.form.append(input, submitButton,logo);
+        this.topBar.append(input, submitButton, logo);
 
-        this.form.addEventListener("submit", e => {
+        this.topBar.addEventListener("submit", e => {
             e.preventDefault();
 
-            const data = new FormData(this.form);
-            const text = data.get(input.name);
-            this.form.reset();
-
-            if (typeof text === "string" && text.trim()) {
-                this.add([text, false]);
+            if (input.value.trim()) {
+                this.add([input.value, false]);
                 this.save();
             }
+
+            this.topBar.reset();
         });
     }
 
@@ -42,7 +39,7 @@ export class Todo {
         for (const cached of this.load()) {
             this.add(cached);
         }
-        root.append(this.form, this.ul);
+        root.append(this.topBar, this.ul);
     }
 
     public add(item: Item) {
@@ -53,6 +50,15 @@ export class Todo {
         node.checkbox.addEventListener("change", () => {
             item[1] = node.checkbox.checked;
             this.save();
+        });
+
+        node.editButton.addEventListener("click", () => {
+            const newText = window.prompt("Edit text:");
+            if (newText !== null) {
+                item[0] = newText;
+                node.span.replaceChildren(newText);
+                this.save();
+            }
         });
 
         node.removeButton.addEventListener("click", () => {
