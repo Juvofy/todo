@@ -37,10 +37,14 @@ export class Todo {
 
     init(root: HTMLElement) {
         for (const cached of this.load()) {
-            this.add(cached);
+            if (cached) {
+                this.add(cached);
+            }
         }
         root.append(this.topBar, this.ul);
     }
+
+    private dragging = false;
 
     public add(item: Item) {
         const node = new TodoItem(...item);
@@ -66,6 +70,74 @@ export class Todo {
             this.items.splice(this.items.indexOf(item), 1);
             this.save();
         });
+
+        let dragImage: HTMLElement | undefined;
+
+        const startDrag = (e: MouseEvent | TouchEvent) => {
+            if (
+                this.dragging ||
+                !(e.target instanceof HTMLElement) ||
+                e.target.closest("button")
+            ) {
+                return;
+            }
+
+            this.dragging = true;
+            document.addEventListener("mousemove", move);
+            document.addEventListener("touchmove", move);
+            document.addEventListener("mouseup", endDrag);
+            document.addEventListener("touchend", endDrag);
+        };
+
+        const move = (e: MouseEvent | TouchEvent) => {
+            if (!dragImage) {
+                node.root.classList.add("dragging");
+                ({ root: dragImage } = new TodoItem(...item));
+                dragImage.classList.add("drag-image");
+                this.ul.appendChild(dragImage);
+            }
+
+            const { clientY } = e instanceof MouseEvent ? e : e.touches[0];
+
+            dragImage.style.top = `${clientY}px`;
+        };
+
+        const endDrag = (e: MouseEvent | TouchEvent) => {
+            dragImage?.remove();
+            dragImage = undefined;
+
+            node.root.classList.remove("dragging");
+            document.removeEventListener("mousemove", move);
+            document.removeEventListener("touchmove", move);
+            document.removeEventListener("mouseup", endDrag);
+            document.removeEventListener("touchend", endDrag);
+
+            node.root.remove();
+
+            const { clientY } = e instanceof MouseEvent ? e : e.touches[0];
+
+            const [closest] = Array.from(this.ul.children).sort((a, b) => {
+                const aRect = a.getBoundingClientRect();
+                const bRect = b.getBoundingClientRect();
+                const aDistance = Math.abs(aRect.top - clientY);
+                const bDistance = Math.abs(bRect.top - clientY);
+                return aDistance - bDistance;
+            });
+
+            const fromIndex = this.items.indexOf(item);
+            const toIndex = Array.from(this.ul.children).indexOf(closest);
+            this.ul.insertBefore(node.root, closest);
+
+            this.items.splice(fromIndex, 1);
+            this.items.splice(toIndex, 0, item);
+
+            this.save();
+
+            setTimeout(() => this.dragging = false, 1);
+        };
+
+        node.root.addEventListener("mousedown", startDrag);
+        node.root.addEventListener("touchstart", startDrag);
     }
 
     private save() {
